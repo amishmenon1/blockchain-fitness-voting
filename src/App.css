@@ -1,0 +1,47 @@
+.App {
+  text-align: center;
+  background-image: url("./images/bg-1.jpeg");
+  color: rgb(255, 255, 255);
+  height: 100vh;
+}
+
+.App-logo {
+  height: 30px;
+}
+
+.App-header {
+  background-color: #d9edf735;
+  height: 110px;
+  padding: 20px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+
+.App-footer {
+  background-color: #d9edf735;
+  height: 110px;
+  padding: 20px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 20px;
+}
+
+.App-title {
+  font-size: 3em;
+  /* margin-top: 0px; */
+  font-style: italic;
+  font-family: "cursive";
+  font-size: "large";
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
