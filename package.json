@@ -1,8 +1,8 @@
 {
-  "name": "eth-cash-flow-tool",
+  "name": "blockchain-fitness-voting",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://amishmenon1.github.io/eth-cash-flow-tool",
+  "homepage": "https://amishmenon1.github.io/blockchain-fitness-voting",
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.0.3",
     "axios": "^0.18.0",
