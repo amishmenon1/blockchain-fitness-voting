@@ -1,6 +1,6 @@
 # ETH Cash Flow Block Explorer
 
-Deployed site: https://amishmenon1.github.io/eth-cash-flow-tool/
+Deployed site: https://amishmenon1.github.io/blockchain-fitness-voting/
 
 This project is a (condensed) Ethereum block explorer project that analyzes transactions within a given range of blocks. The application integrates with Metamask. Given a range of block numbers, the following data is generated:
 
