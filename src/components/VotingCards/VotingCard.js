@@ -51,6 +51,7 @@ function VotingCard({ variant, voteDisabled, voteCallback }) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={styles.button}
+          aria-label={variant.value}
         >
           Vote!
         </Button>

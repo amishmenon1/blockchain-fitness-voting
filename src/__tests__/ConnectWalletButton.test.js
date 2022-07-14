@@ -2,8 +2,9 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { generateTestingUtils } from "eth-testing";
-import { mockWeb3State } from "../../test/testWeb3Utils";
-import ConnectWalletButton from ".";
+import { mockWeb3State } from "../test/testWeb3Utils";
+import ConnectWalletButton from "../components/ConnectWalletButton";
+import { BigNumber } from "ethers";
 
 describe("ConnectWalletButton component", () => {
   let connectWalletButtonElement;
@@ -29,15 +30,16 @@ describe("ConnectWalletButton component", () => {
   it("is not displayed when wallet is connected", () => {
     testingUtils.mockConnectedWallet([mockedAccount]);
     const connected = true;
-    const mockedWeb3State = mockWeb3State(connected, mockedAccount);
+    const balance = testingUtils.mockBalance(mockedAccount, BigNumber.from(1));
+    const mockedWeb3State = mockWeb3State(connected, mockedAccount, balance);
     render(
       <ConnectWalletButton
         web3State={mockedWeb3State}
-        onSubmit={mockCallback}
+        connectWalletCb={mockCallback}
       />
     );
     connectWalletButtonElement = screen.queryByText("Connect Wallet");
-    console.log(connectWalletButtonElement);
+    // console.log(connectWalletButtonElement);
     expect(connectWalletButtonElement).not.toBeInTheDocument();
   });
 });
