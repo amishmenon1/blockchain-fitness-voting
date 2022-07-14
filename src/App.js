@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "./App.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { BigNumber } from "ethers";
 import {
   Disclaimer,
   ConnectWalletButton,
@@ -36,20 +37,35 @@ const App = () => {
     }
     loadWeb3State().then((response) => {
       const { connected, accounts } = response;
-      // setBlockInputsDisabled(!connected);
       if (!connected || !accounts) {
         return;
       }
       const account = connected ? accounts[0] : null;
-      provider.getBalance(account).then((balance) => {
-        setWeb3State({
-          ethereum,
-          provider,
-          account,
-          connected,
-          balance,
+      console.log("getting balance for: ", account);
+
+      ethereum
+        .request({
+          method: "eth_getBalance",
+          params: [account, "latest"],
+        })
+        .then((result, err) => {
+          console.log("result: ", result.toString());
+          const balance = result ? BigNumber.from(result.toString()) : 0;
+          console.log("state: ", {
+            ethereum,
+            provider,
+            account,
+            connected,
+            balance,
+          });
+          setWeb3State({
+            ethereum,
+            provider,
+            account,
+            connected,
+            balance,
+          });
         });
-      });
     });
   }, []);
 

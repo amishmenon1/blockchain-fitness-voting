@@ -17,16 +17,28 @@ function getSigner(provider) {
 }
 
 async function walletIsConnected() {
+  console.log("walletIsConnected()");
+
   try {
     const { ethereum } = window;
+    console.log("ethereum object: ", ethereum);
     let connected, accounts;
     if (!ethereum) {
       connected = false;
     } else {
+      console.log("getting account");
       accounts = await ethereum.request({ method: "eth_accounts" });
+      console.log("accounts: ", accounts);
       connected = Boolean(accounts.length > 0);
+      console.log("connected: ", connected);
+      return { connected, accounts };
+      // ethereum.request({ method: "eth_accounts" }).then((accountResponse) => {
+      //   accounts = accountResponse;
+      //   console.log("accounts: ", accounts);
+      //   connected = Boolean(accounts.length > 0);
+      //   return { connected, accounts };
+      // });
     }
-    return { connected, accounts };
   } catch (error) {
     console.error(error);
   }
