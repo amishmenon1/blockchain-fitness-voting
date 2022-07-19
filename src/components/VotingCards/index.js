@@ -60,7 +60,9 @@ const VotingCards = ({ votingState, web3State, voteCallback }) => {
         const idleDisplay = web3State.connected ? (
           <div></div>
         ) : (
-          <div>Connect wallet to place your vote</div>
+          <div>
+            *** Connect wallet to the Ropsten testnet to place your vote! ***
+          </div>
         );
         return idleDisplay;
       case Status.PENDING:

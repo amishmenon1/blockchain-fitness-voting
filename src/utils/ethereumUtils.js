@@ -8,6 +8,7 @@ function toEther(wei) {
 function getEthereumProvider(ethereum) {
   if (!ethereum) {
     logNoWalletFound();
+    return;
   }
   return new ethers.providers.Web3Provider(ethereum);
 }
@@ -46,21 +47,24 @@ async function walletIsConnected() {
 // TODO: multiple wallet extensions? open only 1
 async function connectWallet() {
   console.log("connectWallet()");
+  let connected = false;
+  let balance = 0;
+
   try {
     const { ethereum } = window;
     if (!ethereum) {
       console.warn("ethereum object not found");
-      return;
+      return [null, null, connected, 0];
     }
     const accounts = await ethereum.request({
       method: "eth_requestAccounts",
     });
     const provider = new ethers.providers.Web3Provider(ethereum);
-    let balance = 0;
     if (provider) {
       balance = await provider.getBalance(accounts[0]);
+      connected = true;
     }
-    return [ethereum, provider, accounts[0], balance];
+    return [ethereum, provider, accounts[0], connected, balance];
   } catch (error) {
     console.error(error);
   }
@@ -81,11 +85,14 @@ function getBlockRange(start, end) {
 }
 
 function logNoWalletFound() {
-  console.warn("Wallet not detected.");
-  toast.warn("Wallet not detected.", {
-    position: toast.POSITION.TOP_RIGHT,
-    autoClose: 5000,
-  });
+  console.warn("Wallet not detected. Please ensure you're connected to the Ropsten testnet.");
+  toast.warn(
+    "Wallet not detected. Please ensure you're connected to the Ropsten testnet.",
+    {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 5000,
+    }
+  );
 }
 
 async function getBlocks(start, end, web3State, dispatch) {
