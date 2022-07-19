@@ -36,10 +36,11 @@ const App = () => {
       return walletIsConnected();
     }
     loadWeb3State().then((response) => {
-      const { connected, accounts } = response;
-      if (!connected || !accounts) {
+      if (!response || !response.connected || !response.accounts) {
         return;
       }
+
+      const { connected, accounts } = response;
       const account = connected ? accounts[0] : null;
       console.log("getting balance for: ", account);
 
@@ -70,13 +71,18 @@ const App = () => {
   }, []);
 
   async function handleConnectWallet() {
-    const [ethereum, provider, account, balance] = await connectWallet();
-    setWeb3State({ ethereum, provider, account, connected: true, balance });
+    const [
+      ethereum,
+      provider,
+      account,
+      connected,
+      balance,
+    ] = await connectWallet();
+    setWeb3State({ ethereum, provider, account, connected, balance });
   }
 
   const disclaimerMessage = () => {
-    const msg = `In order for this app to work successfully, you must have a Metamask or Web3 provider
-          account setup.`;
+    const msg = `In order for this app to work successfully, you must have a Metamask wallet connected to the Ropsten testnet.`;
     return msg;
   };
 

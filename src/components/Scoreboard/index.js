@@ -53,7 +53,7 @@ const Scoreboard = () => {
 
     switch (votingState.status) {
       case Status.IDLE:
-        return <div>*** Place Your Vote! ***</div>;
+        return <></>;
       case Status.PENDING:
         return loader("Updating votes...");
       case Status.VOTES_LOADING:
