@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "2b759742dd02cc53b3f2",
+    "revision": "1c0cea027bb81b23cc7d",
     "url": "/blockchain-fitness-voting/static/css/main.e363a452.chunk.css"
   },
   {
-    "revision": "2b759742dd02cc53b3f2",
-    "url": "/blockchain-fitness-voting/static/js/main.08d6d8c3.chunk.js"
+    "revision": "1c0cea027bb81b23cc7d",
+    "url": "/blockchain-fitness-voting/static/js/main.2f75fbbc.chunk.js"
   },
   {
     "revision": "7b8189739769728ec724",
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/blockchain-fitness-voting/static/media/cardio2-gif.b92a3bff.gif"
   },
   {
-    "revision": "8bebe53a3e1fb4d300080124956c79d4",
+    "revision": "5f2cef607be74235841b30c67b811675",
     "url": "/blockchain-fitness-voting/index.html"
   }
 ];
