@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 import { StyledButton } from "components/button";
 
-function VotingCard({ variant, voteDisabled, voteCallback }) {
+function VotingCard({ variant, voteDisabled = false, voteCallback }) {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseEnter = (e) => {
