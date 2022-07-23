@@ -1,4 +1,4 @@
-const Status = {
+const VotingStatus = {
   IDLE: "idle",
   PENDING: "pending",
   VOTES_LOADING: "votes loading",
@@ -10,4 +10,4 @@ const Status = {
   FILTERED: "filtered",
 };
 
-export default Status;
+export default VotingStatus;

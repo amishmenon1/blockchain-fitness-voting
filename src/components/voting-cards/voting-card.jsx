@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
+import { StyledButton } from "components/button";
 
 function VotingCard({ variant, voteDisabled, voteCallback }) {
   const [isHovering, setIsHovering] = useState(false);
@@ -41,7 +42,7 @@ function VotingCard({ variant, voteDisabled, voteCallback }) {
       <Card.Img src={variant.image} style={styles.image} />
       <Card.Header style={styles.header}>{variant.text}</Card.Header>
       <Card.Body>
-        <Button
+        <StyledButton
           type="submit"
           onClick={voteCallback}
           value={variant.value}
@@ -54,7 +55,7 @@ function VotingCard({ variant, voteDisabled, voteCallback }) {
           aria-label={variant.value}
         >
           Vote!
-        </Button>
+        </StyledButton>
       </Card.Body>
     </Card>
   );
