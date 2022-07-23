@@ -82,7 +82,7 @@ export function VotingContextProvider() {
           <Dialog open={true} maxWidth="sm" fullWidth>
             <DialogTitle>An Error Occurred</DialogTitle>
             <DialogContent>{votingState.error}</DialogContent>
-          </DialogTitle>
+          </Dialog>
         );
       }
       return (
