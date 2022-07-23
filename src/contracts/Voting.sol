@@ -2,28 +2,20 @@
 pragma solidity 0.8.7;
 
 contract Voting{
-    int weightlifting;
-    int cardio;
+    uint public weightliftingVotes;
+    uint public cardioVotes;
 
     constructor(){
-        weightlifting = 0;
-        cardio = 0;
-    }
-
-    function getWeightliftingVotes () public view returns(int) {
-        return weightlifting;
-    }
-
-    function getCardioVotes () public view returns(int) {
-        return cardio;
+        weightliftingVotes = 0;
+        cardioVotes = 0;
     }
 
     function voteWeightlifting () public {
-        weightlifting = weightlifting + 1;
+        weightliftingVotes += 1;
     }
 
     function voteCardio () public {
-        cardio = cardio + 1;
+        cardioVotes += 1;
     }
 
 }

@@ -17,7 +17,7 @@ import {
 } from "../test/testWeb3Utils";
 import { VotingData } from "../abis/VotingData";
 import { generateTestingUtils } from "eth-testing";
-import ExerciseType from "../global/ExerciseType";
+import ExerciseType from "../global/exercise-types";
 import App from "../App";
 import { BigNumber } from "ethers";
 import VotingCards from "../components/VotingCards";

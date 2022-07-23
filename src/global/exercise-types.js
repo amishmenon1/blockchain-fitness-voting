@@ -1,5 +1,5 @@
-import weightliftingGif from "../images/weightlifting-gif.gif";
-import cardioGif from "../images/cardio2-gif.gif";
+import weightliftingGif from "images/weightlifting-gif.gif";
+import cardioGif from "images/cardio2-gif.gif";
 
 const ExerciseType = {
   WEIGHTLIFTING: {

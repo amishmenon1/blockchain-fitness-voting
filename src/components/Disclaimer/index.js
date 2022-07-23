@@ -1,15 +1,3 @@
-import React from "react";
-import Row from "react-bootstrap/Row";
+import Disclaimer from "./disclaimer";
 
-const Disclaimer = ({ message }) => {
-  return (
-    <Row className="centeralign">
-      <h3>Disclaimer</h3>
-      <Row>
-        <p>{message}</p>
-      </Row>
-    </Row>
-  );
-};
-
-export default Disclaimer;
+export { Disclaimer };
