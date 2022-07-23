@@ -10,7 +10,7 @@ const App = () => {
   console.log("App component -- render");
 
   const styles = {
-    connectButtonRow: {
+    mainRow: {
       display: "flex",
       justifyContent: "center",
     },
@@ -21,7 +21,7 @@ const App = () => {
       <div className="App">
         <AppHeader />
         <ToastContainer />
-        <Row style={styles.connectButtonRow}>
+        <Row style={styles.mainRow}>
           <AccountDisplay />
         </Row>
         <AppFooter />
