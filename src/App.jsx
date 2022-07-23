@@ -6,8 +6,6 @@ import Row from "react-bootstrap/Row";
 import { AppHeader, AppFooter } from "./components";
 import { AccountDisplay } from "./components/user";
 
-// require("dotenv").config({ path: __dirname + "./env" });
-
 const App = () => {
   console.log("App component -- render");
 

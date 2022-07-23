@@ -79,15 +79,10 @@ export function VotingContextProvider() {
     case WalletStatus.CONNECTED: {
       if (votingState.status === VotingStatus.REJECTED) {
         return (
-          <Dialog
-            open={true}
-            // onClose={() => setOpen(false)}
-            maxWidth="sm"
-            fullWidth
-          >
+          <Dialog open={true} maxWidth="sm" fullWidth>
             <DialogTitle>An Error Occurred</DialogTitle>
             <DialogContent>{votingState.error}</DialogContent>
-          </Dialog>
+          </DialogTitle>
         );
       }
       return (
