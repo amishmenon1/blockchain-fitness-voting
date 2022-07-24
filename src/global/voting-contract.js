@@ -8,7 +8,7 @@ export function useReadonlyVotingContract() {
   const provider = new ethers.providers.Web3Provider(ethereum);
   const contract = React.useMemo(() => {
     return new ethers.Contract(
-      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS_NEW, //old
+      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS,
       VotingData,
       provider
     );
@@ -25,7 +25,7 @@ export function useVotingContract() {
       `contract address: ${process.env.REACT_APP_VOTING_CONTRACT_ADDRESS}`
     );
     return new ethers.Contract(
-      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS_NEW,
+      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS,
       VotingData,
       signer
     );
