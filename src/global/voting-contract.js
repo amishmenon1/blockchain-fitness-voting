@@ -25,7 +25,7 @@ export function useVotingContract() {
       `contract address: ${process.env.REACT_APP_VOTING_CONTRACT_ADDRESS}`
     );
     return new ethers.Contract(
-      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS_NEW, //old
+      process.env.REACT_APP_VOTING_CONTRACT_ADDRESS_NEW,
       VotingData,
       signer
     );
