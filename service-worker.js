@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/blockchain-fitness-voting/precache-manifest.d049df20d33e161be35ae7f4f9aa86e5.js"
+  "/blockchain-fitness-voting/precache-manifest.d02cf2fb75a286dca1d695fc142d73e2.js"
 );
 
 workbox.clientsClaim();
