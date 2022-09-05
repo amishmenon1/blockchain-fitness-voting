@@ -1,11 +1,10 @@
 import React, { useReducer, useEffect } from "react";
-import { Row, Button } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import VotingStatus from "global/voting-status";
 import { Scoreboard, VotingCards } from "components";
 import { votingStatusReducer } from "global/reducer/voting-status-reducer";
 import { useMetaMask } from "metamask-react";
 import WalletStatus from "global/wallet-status";
-import { toast } from "react-toastify";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 import { useReadonlyVotingContract } from "global/voting-contract";
 
@@ -56,51 +55,33 @@ export function VotingContextProvider() {
     });
   }
 
-  const loader = (msg) => (
-    <Button variant="link" id="loader" className="text-center">
-      {msg}
-    </Button>
-  );
-
-  switch (status) {
-    case WalletStatus.INITIALIZING: {
-      return loader("Checking Web3 connection...");
+  switch (votingState.status) {
+    case VotingStatus.REJECTED: {
+      return (
+        <Dialog open={true} maxWidth="sm" fullWidth>
+          <DialogTitle>An Error Occurred</DialogTitle>
+          <DialogContent>{votingState.error}</DialogContent>
+        </Dialog>
+      );
     }
-    case WalletStatus.UNAVAILABLE: {
-      toast.warn("Wallet unavailable", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 5000,
-      });
-      return;
-    }
-    case WalletStatus.NOT_CONNECTED: {
-      return;
-    }
-    case WalletStatus.CONNECTED: {
-      if (votingState.status === VotingStatus.REJECTED) {
-        return (
-          <Dialog open={true} maxWidth="sm" fullWidth>
-            <DialogTitle>An Error Occurred</DialogTitle>
-            <DialogContent>{votingState.error}</DialogContent>
-          </Dialog>
-        );
-      }
+    default:
       return (
         <Row>
           <VotingContext.Provider value={[votingState, dispatch]}>
             <Row>
-              <VotingCards loadVotes={loadVotes} />
+              <VotingCards
+                connected={status === WalletStatus.CONNECTED}
+                loadVotes={loadVotes}
+              />
             </Row>
             <Row>
-              <Scoreboard loadVotes={loadVotes} />
+              <Scoreboard
+                connected={status === WalletStatus.CONNECTED}
+                loadVotes={loadVotes}
+              />
             </Row>
           </VotingContext.Provider>
         </Row>
       );
-    }
-
-    default: {
-      return;
-    }
   }
 }

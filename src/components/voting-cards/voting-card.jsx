@@ -1,21 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import { StyledButton } from "components/button";
 
 function VotingCard({ variant, voteDisabled = false, voteCallback }) {
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handleMouseEnter = (e) => {
-    setIsHovering(true);
-  };
-
-  const handleMouseLeave = (e) => {
-    setIsHovering(false);
-  };
   const styles = {
     button: {
-      backgroundColor: isHovering ? "#000000" : "#D6DBDF",
-      color: isHovering ? "#FFFFFF" : "#000000",
+      backgroundColor: "#D6DBDF",
+      color: "#000000",
     },
     image: {
       objectFit: "cover",
@@ -44,13 +35,12 @@ function VotingCard({ variant, voteDisabled = false, voteCallback }) {
       <Card.Body>
         <StyledButton
           type="submit"
-          onClick={voteCallback}
+          onClick={() => voteCallback(variant)}
           value={variant.value}
           key={variant.value}
           disabled={voteDisabled}
+          hoverEnabled={true}
           className="btn btn-primary btn-block btn-lg"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           style={styles.button}
           aria-label={variant.value}
         >

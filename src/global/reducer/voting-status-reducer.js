@@ -55,7 +55,6 @@ export function votingStatusReducer(state, action) {
     }
 
     case VotingStatus.REJECTED: {
-      debugger;
       console.log(
         "VotingContextProvider --- reducer --- status: rejected",
         action.error
@@ -69,7 +68,6 @@ export function votingStatusReducer(state, action) {
       );
       return {
         status: VotingStatus.REJECTED,
-        // data: null,
         error: action.error,
       };
     }
