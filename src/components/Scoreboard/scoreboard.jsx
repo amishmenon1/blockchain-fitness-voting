@@ -4,28 +4,12 @@ import VotingStatus from "global/voting-status";
 import { Button } from "react-bootstrap";
 import ExerciseType from "global/exercise-types";
 
-function Scoreboard() {
-  const [votingState] = useContext(VotingContext);
-  const { numWeightliftingVotes, numCardioVotes } = votingState;
-
-  function determineLeader() {
-    console.log("determining winner");
-    const { WEIGHTLIFTING, CARDIO } = ExerciseType;
-    let result;
-    if (numWeightliftingVotes > numCardioVotes) {
-      result = WEIGHTLIFTING;
-    } else if (numWeightliftingVotes < numCardioVotes) {
-      result = CARDIO;
-    } else {
-      result = { text: "Tied", value: "TIED" };
-    }
-    return result;
-  }
-
+function ScoreboardDisplay({
+  result = {},
+  numWeightliftingVotes = "0",
+  numCardioVotes = "0",
+}) {
   const styles = {
-    loader: {
-      color: "#FFFFFF",
-    },
     scoreboard: {
       backgroundColor: "#000000",
       opacity: "80%",
@@ -35,21 +19,72 @@ function Scoreboard() {
       borderRadius: "20px",
     },
   };
-
-  function ScoreboardUI(result) {
-    return (
-      <div style={styles.scoreboard}>
-        <h2>
-          {result.value === "TIED" ? result.text : `Leader: ${result.text}`}!
-        </h2>
-        <p>Weightlifting Votes: {numWeightliftingVotes.toString()}</p>
-        <p>Cardio Votes: {numCardioVotes.toString()}</p>
-      </div>
+  function Leader({ result }) {
+    const styles = {
+      connectMessage: {
+        fontStyle: "italic",
+        fontFamily: "cursive",
+      },
+    };
+    return result.text ? (
+      <h2>
+        {result.value === "TIED" ? result.text : `Leader: ${result.text}`}!
+      </h2>
+    ) : (
+      <h2 style={styles.connectMessage}>Connect Wallet to Vote!</h2>
     );
+  }
+  return (
+    <div style={styles.scoreboard}>
+      <Leader result={result} />
+      <p>Weightlifting Votes: {numWeightliftingVotes.toString()}</p>
+      <p>Cardio Votes: {numCardioVotes.toString()}</p>
+    </div>
+  );
+}
+function DisconnectedScoreboard() {
+  return (
+    <ScoreboardDisplay
+      result={{ text: "", value: "" }}
+      numWeightliftingVotes={"0"}
+      numCardioVotes={"0"}
+    />
+  );
+}
+
+function ConnectedScoreboard() {
+  const [votingState] = useContext(VotingContext);
+  const { numWeightliftingVotes, numCardioVotes } = votingState;
+
+  function determineLeader() {
+    console.log("determining winner");
+    const { WEIGHTLIFTING, CARDIO } = ExerciseType;
+    let result;
+    if (numWeightliftingVotes.toNumber() > numCardioVotes.toNumber()) {
+      result = WEIGHTLIFTING;
+    } else if (numWeightliftingVotes < numCardioVotes) {
+      result = CARDIO;
+    } else {
+      result = { text: "Tied", value: "TIED" };
+    }
+    return result;
   }
 
   function DisplayIfExists() {
-    const loader = (msg) => (
+    const styles = {
+      loader: {
+        color: "#FFFFFF",
+      },
+      scoreboard: {
+        backgroundColor: "#000000",
+        opacity: "80%",
+        color: "#FFFFFF",
+        width: "400px",
+        display: "inline-block",
+        borderRadius: "20px",
+      },
+    };
+    const Loader = ({ msg }) => (
       <div style={styles.scoreboard}>
         <Button
           style={styles.loader}
@@ -66,19 +101,39 @@ function Scoreboard() {
       case VotingStatus.IDLE:
         return <></>;
       case VotingStatus.PENDING:
-        return loader("Updating votes...");
+        return <Loader msg={"Updating votes..."} />;
       case VotingStatus.VOTES_LOADING:
-        return loader("Loading votes...");
+        return <Loader msg={"Loading votes..."} />;
       case VotingStatus.VOTE_ACTION_RESOLVED:
-        return loader("Refreshing vote results...");
+        return <Loader msg={"Refreshing vote results..."} />;
       case VotingStatus.VOTES_LOADED:
-        return ScoreboardUI(determineLeader());
+        const leader = determineLeader();
+        return (
+          <ScoreboardDisplay
+            result={leader}
+            numWeightliftingVotes={numWeightliftingVotes}
+            numCardioVotes={numCardioVotes}
+          />
+        );
       default:
         console.log("default case - unexpected");
     }
   }
 
-  return <DisplayIfExists />;
+  return (
+    <DisplayIfExists
+      numWeightliftingVotes={numWeightliftingVotes}
+      numCardioVotes={numCardioVotes}
+    />
+  );
+}
+
+function Scoreboard({ connected = false, loadVotes }) {
+  return connected ? (
+    <ConnectedScoreboard loadVotes={loadVotes} />
+  ) : (
+    <DisconnectedScoreboard />
+  );
 }
 
 export default Scoreboard;

@@ -1,24 +1,28 @@
-import { useMetaMask } from "metamask-react";
 import React from "react";
+import { AccountDisplay } from "components/user";
 
 function AppHeader() {
-  const { account } = useMetaMask();
+  console.log("AppHeader --- render");
+
   const styles = {
-    connected: {
-      fontStyle: "italic",
+    header: {
+      height: "120px",
+      color: "rgb(255, 255, 255)",
+      marginBottom: "20px",
+    },
+    title: {
+      fontSize: "3em",
+      marginTop: "0px",
+      fontsSyle: "italic",
+      fontFamily: "cursive",
+      paddingTop: "20px",
     },
   };
   return (
     <>
-      <header className="App-header">
-        {account && (
-          <div style={styles.connected}>
-            {" "}
-            Wallet Connected: {account.slice(0, 3)}...
-            {account.slice(-3)}
-          </div>
-        )}
-        <h1 className="App-title">Blockchain Fitness Voting App</h1>
+      <header style={styles.header}>
+        <h1 style={styles.title}>Blockchain Fitness Voting</h1>
+        <AccountDisplay />
       </header>
     </>
   );

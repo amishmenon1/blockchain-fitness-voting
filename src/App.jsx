@@ -1,10 +1,9 @@
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
-import Row from "react-bootstrap/Row";
+import bg from "images/bg-1.jpeg";
 import { AppHeader, AppFooter } from "./components";
-import { AccountDisplay } from "./components/user";
+import { VotingContainer } from "components/voting-cards/voting-container";
 
 const App = () => {
   console.log("App component -- render");
@@ -14,16 +13,20 @@ const App = () => {
       display: "flex",
       justifyContent: "center",
     },
+    app: {
+      textAlign: "center",
+      backgroundImage: `url(${bg})`,
+      color: "rgb(255, 255, 255)",
+      height: "100vh",
+    },
   };
 
   return (
     <>
-      <div className="App">
+      <div style={styles.app}>
         <AppHeader />
         <ToastContainer />
-        <Row style={styles.mainRow}>
-          <AccountDisplay />
-        </Row>
+        <VotingContainer />
         <AppFooter />
       </div>
     </>

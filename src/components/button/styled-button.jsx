@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
 
-function StyledButton({ onClick, disabled = false, style, children }) {
+function StyledButton({
+  onClick,
+  disabled = false,
+  hoverEnabled = false,
+  style = {},
+  children,
+}) {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseEnter = (e) => {
     setIsHovering(true);
@@ -18,16 +23,17 @@ function StyledButton({ onClick, disabled = false, style, children }) {
   };
 
   return (
-    <Button
-      variant="contained"
+    <button
+      type="button"
       onClick={onClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={hoverEnabled ? handleMouseEnter : null}
+      onMouseLeave={hoverEnabled ? handleMouseLeave : null}
       style={buttonStyles}
       disabled={disabled}
+      className="btn btn-primary"
     >
       {children}
-    </Button>
+    </button>
   );
 }
 
