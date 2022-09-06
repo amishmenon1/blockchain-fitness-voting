@@ -51,7 +51,6 @@ function ConnectedAccountDisplay() {
 
 function AccountDisplay() {
   console.log("AccountDisplay --- render");
-
   const { status } = useMetaMask();
 
   return (
