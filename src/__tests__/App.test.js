@@ -15,12 +15,13 @@ import {
   getMockedAccount,
   mockWeb3State,
 } from "../test/testWeb3Utils";
-import { VotingData } from "../abis/VotingData";
+// import { VotingData } from "../abis/VotingData";
 import { generateTestingUtils } from "eth-testing";
-import ExerciseType from "../global/exercise-types";
+// import ExerciseType from "../global/exercise-types";
 import App from "../App";
-import { BigNumber } from "ethers";
-import VotingCards from "../components/VotingCards";
+import { MetaMaskProvider } from "metamask-react";
+// import { BigNumber } from "ethers";
+// import { VotingCards } from "components/VotingCards";
 
 describe("App component", () => {
   const mockedAccount = getMockedAccount();
@@ -31,7 +32,7 @@ describe("App component", () => {
 
   let originalEth;
   beforeAll(() => {
-    originalEth = global.window.ethereum;
+    originalEth = window.ethereum;
     const provider = testingUtils.getProvider();
     window.ethereum = provider;
   });
@@ -43,20 +44,22 @@ describe("App component", () => {
     testingUtils.clearAllMocks();
   });
 
-  describe("web3 login", () => {
+  describe("web3 login", async () => {
     it("can connect to MetaMask", async () => {
       testingUtils.mockNotConnectedWallet();
       testingUtils.mockRequestAccounts([mockedAccount]);
 
-      render(<App />);
+      render(
+        <MetaMaskProvider>
+          <App />
+        </MetaMaskProvider>
+      );
       const connectButton = await screen.findByRole("button", {
         name: /Connect/i,
       });
 
       // Click the Connect Wallet button (before login)
       fireEvent.click(connectButton);
-      await waitForElementToBeRemoved(connectButton);
-
       const expectedElement = screen.queryByText(/Wallet Connected/i);
       expect(expectedElement).toBeInTheDocument();
 
