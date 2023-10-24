@@ -4,10 +4,12 @@ import Status from "../../global/Status";
 import { Row, Button, Spinner } from "react-bootstrap";
 import ExerciseType from "../../global/ExerciseType";
 
+// Scoreboard component displays the current voting results
 const Scoreboard = () => {
   const [votingState] = useContext(VotingContext);
   const { numWeightliftingVotes, numCardioVotes } = votingState;
 
+  // determineLeader function determines the current leader based on the number of votes
   function determineLeader() {
     console.log("determining winner");
     const { WEIGHTLIFTING, CARDIO } = ExerciseType;
@@ -22,6 +24,7 @@ const Scoreboard = () => {
     return result.text;
   }
 
+  // ScoreboardUI function returns the UI for the scoreboard
   function ScoreboardUI(result) {
     return (
       <div>
@@ -39,6 +42,8 @@ const Scoreboard = () => {
       color: "#FFFFFF",
     },
   };
+
+  // DisplayIfExists function returns the appropriate UI based on the current voting status
   function DisplayIfExists() {
     const loader = (msg) => (
       <Button
